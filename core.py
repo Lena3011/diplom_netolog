@@ -61,7 +61,7 @@ class VkTools:
 
     def user_serch(self, user_id, profile_info):
         global OFFSET
-        OFFSET += 5
+        OFFSET += 50
         offset_count = OFFSET
         if profile_info:
             print(self.get_profile_info(user_id))
@@ -73,7 +73,7 @@ class VkTools:
                                             'age_from': self.get_age_from(profile_info),
                                             'age_to': self.get_age_to(profile_info),
                                             'sex': self.get_profile_sex(profile_info),
-                                            'count': 5,
+                                            'count': 50,
                                             'offset': offset_count})
         except ApiError:
             return
