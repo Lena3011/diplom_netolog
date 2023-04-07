@@ -32,18 +32,25 @@ class BotInterface:
                     create_table_viewed()
                     self.dict_user_serch = tools.user_serch(user_id, profile_info)
                     worksheet_id = tools.pop_person_id(user_id, self.dict_user_serch)
-                    self.handler_serch(user_id, worksheet_id)
+                    if worksheet_id:
+                        self.handler_serch(user_id, worksheet_id)
+                    else:
+                        while worksheet_id is None:
+                            self.dict_user_serch = tools.user_serch(user_id, profile_info)
+                            worksheet_id = tools.pop_person_id(user_id, self.dict_user_serch)
+                            if worksheet_id:
+                                self.handler_serch(user_id, worksheet_id)
                 elif event.text.lower() == 'далее':
-                    print('Введено Далее')
                     worksheet_id = tools.pop_person_id(user_id, self.dict_user_serch)
                     if worksheet_id:
                         self.handler_serch(user_id, worksheet_id)
                     else:
                         print('далее - else')
-                        self.dict_user_serch = tools.user_serch(user_id, profile_info)
-                        worksheet_id = tools.pop_person_id(user_id, self.dict_user_serch)
-                        if worksheet_id:
-                            self.handler_serch(user_id, worksheet_id)
+                        while worksheet_id is None:
+                            self.dict_user_serch = tools.user_serch(user_id, profile_info)
+                            worksheet_id = tools.pop_person_id(user_id, self.dict_user_serch)
+                            if worksheet_id:
+                                self.handler_serch(user_id, worksheet_id)
                 else:
                     self.message_send(event.user_id, 'Неизвестная команда. Введите слово ПОИСК или ДАЛЕЕ')
 
